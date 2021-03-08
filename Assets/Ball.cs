@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        velocity = new Vector3(0, 0, speedZ);
+        velocity = new Vector3(0, 0, -speedZ);
     }
 
     // Update is called once per frame
@@ -33,6 +33,10 @@ public class Ball : MonoBehaviour
         else if (other.CompareTag("Wall"))
         {
             velocity = new Vector3(-velocity.x, velocity.y, velocity.z);
+        }
+        else if (other.CompareTag("Block"))
+        {
+            velocity = new Vector3(velocity.x, velocity.y, -velocity.z);
         }
         GetComponent<AudioSource>().Play();
     }
