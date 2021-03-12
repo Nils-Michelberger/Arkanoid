@@ -57,6 +57,11 @@ public class Ball : MonoBehaviour
             velocity = new Vector3(velocity.x, velocity.y, -velocity.z);
             GetComponent<AudioSource>().Play();
         }
+        else if (other.CompareTag("Wall Top"))
+        {
+            velocity = new Vector3(velocity.x, velocity.y, -velocity.z);
+            GetComponent<AudioSource>().Play();
+        }
         else if (other.CompareTag("Border"))
         {
             if (gameStats.BallsCount <= 1)
