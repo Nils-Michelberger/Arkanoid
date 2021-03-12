@@ -13,10 +13,16 @@ public class Ball : MonoBehaviour
     public float speedZ;
     public GameObject gameStatsObject;
     private Ball oldBall;
+    private AudioSource ballSound;
+    private AudioSource powerUpSound;
 
     // Start is called before the first frame update
     void Start()
     {
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        ballSound = audioSources[0];
+        powerUpSound = audioSources[1];
+        
         if (oldBall != null)
         {
             StartCoroutine(StartBallWithVelocity(oldBall.Velocity));
@@ -43,24 +49,24 @@ public class Ball : MonoBehaviour
             float dist = transform.position.x - other.transform.position.x;
             float nDist = dist / maxDist;
             velocity = new Vector3(nDist * speedX, velocity.y, -velocity.z);
-            GetComponent<AudioSource>().Play();
+            ballSound.Play();
         }
         else if (other.CompareTag("Wall"))
         {
             velocity = new Vector3(-velocity.x, velocity.y, velocity.z);
-            GetComponent<AudioSource>().Play();
+            ballSound.Play();
         }
         else if (other.CompareTag("Block"))
         {
             gameStats.ScoreValue += 10;
             gameStats.score.text = gameStats.ScoreValue.ToString();
             velocity = new Vector3(velocity.x, velocity.y, -velocity.z);
-            GetComponent<AudioSource>().Play();
+            ballSound.Play();
         }
         else if (other.CompareTag("Wall Top"))
         {
             velocity = new Vector3(velocity.x, velocity.y, -velocity.z);
-            GetComponent<AudioSource>().Play();
+            ballSound.Play();
         }
         else if (other.CompareTag("Border"))
         {
@@ -74,14 +80,18 @@ public class Ball : MonoBehaviour
                 gameStats.health.text = gameStats.HealthValue.ToString();
                 
                 StartCoroutine(ResetBall());
-                GetComponent<AudioSource>().Play();
+                ballSound.Play();
             }
             else
             {
-                GetComponent<AudioSource>().Play();
+                ballSound.Play();
                 gameStats.BallsCount--;
                 StartCoroutine(DestroyAfterOneSecond());
             }
+        }
+        else if (other.CompareTag("PowerUpMulti") || other.CompareTag("PowerUpScale"))
+        {
+            powerUpSound.Play();
         }
     }
 
