@@ -13,8 +13,7 @@ public class Powerup : MonoBehaviour
 
     private IEnumerator ShowAfterRandomTime()
     {
-        float time = 3f;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(Random.value * 20 + 1);
         ToggleVisibilityAndCollider(true);
     }
 
@@ -26,9 +25,9 @@ public class Powerup : MonoBehaviour
     protected void ToggleVisibilityAndCollider(bool visibleAndHittable)
     {
         //NOTE: Merge all meshes into one to increase performance
+        GetComponent<BoxCollider>().enabled = visibleAndHittable;
         Renderer[] rs = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rs)
             r.enabled = visibleAndHittable;
-        GetComponent<BoxCollider>().enabled = visibleAndHittable;
     }
 }

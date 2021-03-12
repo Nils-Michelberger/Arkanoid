@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class PowerupMulti : Powerup
+public class PowerUpMulti : Powerup
 {
     private void OnTriggerEnter(Collider other)
     {

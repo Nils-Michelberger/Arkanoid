@@ -10,6 +10,7 @@ TagManager:
   - Border
   - PowerUpMulti
   - PowerUpScale
+  - Wall Top
   layers:
   - Default
   - TransparentFX
