@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Block
   - Border
+  - PowerUpMulti
+  - PowerUpScale
   layers:
   - Default
   - TransparentFX
