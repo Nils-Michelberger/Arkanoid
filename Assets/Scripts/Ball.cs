@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     private Ball oldBall;
     private AudioSource ballSound;
     private AudioSource powerUpSound;
+    public GameObject arrow;
 
     // Start is called before the first frame update
     void Start()
@@ -106,8 +107,14 @@ public class Ball : MonoBehaviour
     private IEnumerator StartBallWithVelocity(Vector3 newVelocity)
     {
         velocity = new Vector3(0, 0, 0);
+        var angle = Math.Atan2(newVelocity.x, newVelocity.z) * Mathf.Rad2Deg + 180;
+        GameObject newArrow = Instantiate(arrow, gameObject.transform.position, Quaternion.Euler(new Vector3(0, Convert.ToSingle(angle), 0)));
+        newArrow.SetActive(true);
+        StartCoroutine(BlinkArrow(newArrow));
         yield return new WaitForSeconds(2f);
         velocity = newVelocity;
+        yield return new WaitForSeconds(1f);
+        Destroy(newArrow);
     }
 
     private IEnumerator DestroyAfterOneSecond()
@@ -115,7 +122,32 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
-    
+
+    private IEnumerator BlinkArrow(GameObject arrow)
+    {
+        Renderer[] rs = arrow.GetComponentsInChildren<Renderer>();
+        
+        showArrow(rs, true);
+        yield return new WaitForSeconds(0.4f);
+        showArrow(rs, false);
+        yield return new WaitForSeconds(0.4f);
+        showArrow(rs, true);
+        yield return new WaitForSeconds(0.4f);
+        showArrow(rs, false);
+        yield return new WaitForSeconds(0.4f);
+        showArrow(rs, true);
+        yield return new WaitForSeconds(0.4f);
+        showArrow(rs, false);
+    }
+
+    private static void showArrow(Renderer[] rs, bool visible)
+    {
+        foreach (Renderer r in rs)
+        {
+            r.enabled = visible;
+        }
+    }
+
     public Vector3 Velocity
     {
         get => velocity;
