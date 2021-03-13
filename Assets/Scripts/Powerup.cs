@@ -13,7 +13,7 @@ public class Powerup : MonoBehaviour
 
     private IEnumerator ShowAfterRandomTime()
     {
-        yield return new WaitForSeconds(Random.value * 20 + 1);
+        yield return new WaitForSeconds(Random.value * 15 + 2.5f);
         ToggleVisibilityAndCollider(true);
     }
 
