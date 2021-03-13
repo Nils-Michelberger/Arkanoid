@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
         
         if (oldBall != null)
         {
-            StartCoroutine(StartBallWithVelocity(oldBall.Velocity));
+            StartCoroutine(StartBallAfterArrowWithVelocity(oldBall.Velocity));
         }
         else
         {
@@ -80,7 +80,7 @@ public class Ball : MonoBehaviour
                 }
                 gameStats.health.text = gameStats.HealthValue.ToString();
                 
-                StartCoroutine(ResetBall());
+                ResetBall();
                 ballSound.Play();
             }
             else
@@ -96,19 +96,18 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private IEnumerator ResetBall()
+    private void ResetBall()
     {
-        velocity = new Vector3(0, 0, 0);
         transform.position = new Vector3(0, 0.5f, -2f);
-        yield return new WaitForSeconds(2f);
-        velocity = new Vector3(0, 0, -speedZ);
+        StartCoroutine(StartBallAfterArrowWithVelocity(new Vector3(0, 0, -speedZ)));
     }
 
-    private IEnumerator StartBallWithVelocity(Vector3 newVelocity)
+    private IEnumerator StartBallAfterArrowWithVelocity(Vector3 newVelocity)
     {
         velocity = new Vector3(0, 0, 0);
         var angle = Math.Atan2(newVelocity.x, newVelocity.z) * Mathf.Rad2Deg + 180;
-        GameObject newArrow = Instantiate(arrow, gameObject.transform.position, Quaternion.Euler(new Vector3(0, Convert.ToSingle(angle), 0)));
+        GameObject newArrow = Instantiate(arrow, gameObject.transform.position,
+            Quaternion.Euler(new Vector3(0, Convert.ToSingle(angle), 0)));
         newArrow.SetActive(true);
         StartCoroutine(BlinkArrow(newArrow));
         yield return new WaitForSeconds(2f);
