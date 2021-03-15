@@ -8,4 +8,8 @@ This game includes:
 - Menu & UI-Elements (Health & Score)
 - Self-made music and game sounds (Tools used: https://www.beepbox.co/ & https://sfxr.me/)
 
+Video demo: [coming soon]
+
+Download built game: https://drive.google.com/file/d/1bDH_Eut2U9cuPIWwoKvn5DTuJVaP-pk4/view?usp=sharing
+
 Enjoy :)
