@@ -24090,6 +24090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f910f3b167b3b4fb2038d4b1e9ebd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redMaterial: {fileID: 2100000, guid: 2450a30777a52e44fbb0e5c0da514822, type: 2}
 --- !u!1 &491521122
 GameObject:
   m_ObjectHideFlags: 0
@@ -92015,7 +92016,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15970
+  m_Name: pb_Mesh16568
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
